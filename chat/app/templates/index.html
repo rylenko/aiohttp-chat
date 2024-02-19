@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	Index
+{% endblock %}
+
+{% block css %}
+	<link href="{{ app.router.static.url_for(filename='index.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+	<div id="messages">
+		{% for message in messages %}
+			<div class="message">
+				[{{ message.created_at.strftime('%H:%M:%S') }}]
+				{{ message.author_username }}:
+				{{ message.text }}
+			</div>
+		{% endfor %}
+	</div>
+		
+	<input type="text" id="message-input" class="form-control mb-3" autocomplete="off">
+	<button class="btn btn-primary" id="send-message-button">Send</button>
+
+	<h4 align="center">Registered users:</h4>
+	<div id="registered-users">
+		{{ users|map(attribute="username")|join(", ") }}
+	</div>
+{% endblock %}
+
+{% block js %}
+	<script src="{{ app.router.static.url_for(filename='index.js') }}"></script>
+{% endblock %}

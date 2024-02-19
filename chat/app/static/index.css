@@ -1,0 +1,9 @@
+#messages {
+	height: 500px;
+	overflow: auto;
+}
+
+#messages, #registered-users {
+	display: block;
+	word-break: break-word;
+}

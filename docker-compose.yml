@@ -1,0 +1,28 @@
+version: "3.7"
+
+services:
+	chat:
+		build: ./chat
+		container_name: chat
+		env_file: ./chat/.env
+		depends_on:
+			- db
+		expose:
+			- 80
+
+	nginx:
+		build: ./nginx
+		container_name: nginx
+		depends_on:
+			- chat
+		ports:
+			- 80:80
+
+	db:
+	    image: mongo
+	    container_name: db
+	    env_file: ./chat/.env
+	    volumes:
+			- ./data/db:/data/db
+	    expose:
+			- 27017

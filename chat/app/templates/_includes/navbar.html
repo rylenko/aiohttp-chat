@@ -1,0 +1,31 @@
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<a class="navbar-brand" href="/">Chat</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<ul class="navbar-nav ml-auto">
+			{% if get_current_user() %}
+				<li class="nav-item">
+					<a class="nav-link" href="{{ app.router['logout'].url_for() }}">
+						Logout
+					</a>
+				</li>
+			{% else %}
+				{% with login_url = app.router['login'].url_for() %}
+					<li class="nav-item {% if request.path == login_url %} active {% endif %}">
+						<a class="nav-link" href="{{ login_url }}">Login</a>
+					</li>
+				{% endwith %}
+
+				{% with register_url = app.router['register'].url_for() %}
+					<li class="nav-item {% if request.path == register_url %} active {% endif %}">
+						<a class="nav-link" href="{{ register_url }}">Register</a>
+					</li>
+				{% endwith %}
+			{% endif %}
+		</ul>
+	</div>
+</nav>

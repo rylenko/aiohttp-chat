@@ -1,0 +1,10 @@
+# Cache
+__pycache__
+.mypy_cache
+
+# Environment
+.env
+
+# Logs and data
+data
+chat/app/logs
